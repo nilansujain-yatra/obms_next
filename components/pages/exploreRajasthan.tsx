@@ -48,7 +48,7 @@ export default function ExploreRajasthan(){
         duration: "3-4 Hours",
         rating: 4.5,
         reviews: 11000,
-        image: "/images/nationalpark.png",
+        image: "/images/nationalpark.svg",
         price: 1,
         description:"Ranthambore National Park, located in Rajasthan, is a renowned wildlife destination famous for its large population of Bengal tigers. Established as a game sanctuary in 1955 and declared a national park in 1980, it's situated at the junction of the Aravali and Vindhya hill ranges. The park covers approximately 400 sq km and is a major attraction for wildlife safaris, birdwatching, and exploring its historic fort",
          priceDetails: {
@@ -65,7 +65,7 @@ export default function ExploreRajasthan(){
         duration: "2-3 Hours",
         rating: 4.9,
         reviews: 15000,
-        image: "/images/hawamahal.png",
+        image: "/images/hawamahal.svg",
         price: 2,
         description:"The Hawa Mahal, or Palace of Winds, is a five-story pink sandstone building in Jaipur, India, famous for its unique honeycomb-like facade of 953 windows, called jharokhas. Built in 1799 by Maharaja Sawai Pratap Singh, the structure was designed to allow royal women to observe street festivities and daily life unseen. The intricate latticework and numerous windows are a feat of both aesthetic design and clever engineering, creating excellent ventilation",
         priceDetails: {
@@ -82,7 +82,7 @@ export default function ExploreRajasthan(){
         duration: "2 Hours",
         rating: 4.6,
         reviews: 8000,
-        image: "/images/muesuem.png",
+        image: "/images/muesuem.svg",
         price: 3,
         description:"Government Central Museum Ajmer",
         priceDetails: {
@@ -100,7 +100,7 @@ export default function ExploreRajasthan(){
         duration: "3-4 Hours",
         rating: 4.7,
         reviews: 12000,
-        image: "/images/hawamahal.png",
+        image: "/images/hawamahal.svg",
         price: 2,
         description:"Amer Fort is a magnificent palace complex located in Jaipur, India, known for its blend of indigenous and Mughal architectural styles, constructed from red sandstone and white marble. Situated on a hilltop, this UNESCO World Heritage site features elaborate palaces, ramparts, courtyards, and the famous Sheesh Mahal (mirror palace). ",
         priceDetails: {
@@ -117,7 +117,7 @@ export default function ExploreRajasthan(){
         duration: "2-3 Hours",
         rating: 4.8,
         reviews: 10000,
-        image: "/images/muesuem.png",
+        image: "/images/muesuem.svg",
         price: 4,
         description:"The City Palace in Jaipur is a sprawling complex built by Maharaja Sawai Jai Singh II that showcases a blend of Mughal and Rajput architecture. It houses the City Palace Museum and remains the residence of the royal family, featuring multiple courtyards, gardens, and several buildings, including the official residence of the Maharaja, Chandra Mahal. ",
         priceDetails: {
