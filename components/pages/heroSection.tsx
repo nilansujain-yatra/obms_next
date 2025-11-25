@@ -1,3 +1,5 @@
+"use client";
+
 import { Search } from "lucide-react";
 import SearchBar from "../widgets/SearchBar";
 import ExploreButton from "../widgets/ExploreButton";
