@@ -66,7 +66,7 @@ export default function SearchBar({
             className="p-2 rounded-full hover:bg-gray-100 text-muted-foreground transition-all"
             >
             <img
-                src="../../../public/images/ai_icon.png"
+                src="/images/ai_icon.png"
                 alt="filter"
                 className="w-5 h-5 object-contain"
             />

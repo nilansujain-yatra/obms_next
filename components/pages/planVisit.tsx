@@ -91,6 +91,7 @@ export default function PlanVisit(){
                 <div>
                   <img
                   src="/images/visit_plan.png"
+                  alt="Plan Your Visit"
                   className="w-full h-full object-cover "
                 />
                   {/* <p className="text-6xl mb-4">🧳</p>

@@ -32,7 +32,8 @@ export default function AccessibilityBar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
  <img
-      src={"../../../public/images/GovermentOfIndia.png"}
+      src="/images/GovermentOfIndia.png"
+      alt="Government of India"
       className="w-40 h-auto object-contain"
     />     
          {/* <span className="text-xs font-semibold">🇮🇳 Government of India</span> */}
