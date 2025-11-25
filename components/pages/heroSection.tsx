@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section
       className="relative min-h-[700px] bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/images/heroFrame.svg')" }}
+      style={{ backgroundImage: "url('/images/heroFrame.png')" }}
     >
       {/* Center Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
@@ -28,7 +28,7 @@ export default function HeroSection() {
     
     {/* Shadow Image Behind Button */}
     <img
-      src="/images/shadow.svg"
+      src="/images/shadow.png"
       alt="button-shadow"
       className="absolute w-[320px] h-auto -z-10 opacity-100"
     />

@@ -6,8 +6,8 @@ export default function RupeeRating({ value, max = 4 }) {
           key={i}
           src={
             i < value
-              ? "/images/ruppe_primary.svg"   // Highlighted rupee (red)
-              : "/images/ruppe_grey.svg"      // Grey rupee
+              ? "/images/ruppe_primary.png"   // Highlighted rupee (red)
+              : "/images/ruppe_grey.png"      // Grey rupee
           }
           className="w-3 h-3 object-contain"
           alt="rupee rating"

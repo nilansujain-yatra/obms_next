@@ -13,7 +13,7 @@ export default function Header(){
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img
-      src="/images/GvmtObms.svg"
+      src="/images/GvmtObms.png"
       alt="Government Tourism Logo"
       className="w-70 h-auto object-contain"
     /> 
@@ -48,7 +48,7 @@ export default function Header(){
             </nav>
 
              <img
-                    src="/images/searchIcon.svg"
+                    src="/images/searchIcon.png"
                     alt="Search"
                     className="w-5 h-5 object-contain"
                     /> 

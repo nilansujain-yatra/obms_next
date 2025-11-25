@@ -90,7 +90,7 @@ export default function PlanVisit(){
               <div className="w-full h-80 bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center text-center">
                 <div>
                   <img
-                  src="/images/visit_plan.svg"
+                  src="/images/visit_plan.png"
                   alt="Plan Your Visit"
                   className="w-full h-full object-cover "
                 />
