@@ -13,7 +13,8 @@ export default function Header(){
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img
-      src={"../../../public/images/GvmtObms.png"}
+      src="/images/GvmtObms.svg"
+      alt="Government Tourism Logo"
       className="w-70 h-auto object-contain"
     /> 
             </div>
@@ -47,8 +48,9 @@ export default function Header(){
             </nav>
 
              <img
-                    src={"../../../public/images/searchIcon.png"}
-                    className="w-70 h-auto object-contain"
+                    src="/images/searchIcon.svg"
+                    alt="Search"
+                    className="w-5 h-5 object-contain"
                     /> 
 
             <button className="hidden sm:block bg-accent text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition bg-primary">
