@@ -166,7 +166,7 @@ function openDialog(data) {
           <p className="text-sm sm:text-base text-black mb-12">
 Discover specialized collections of wildlife reserves, historic monuments, and cultural museums          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex gap-4 overflow-x-auto pb-4 pl-6">
             {[
               { name: "Wildlife", icon: "🦁" },
               { name: "Monuments", icon: "🏛️" },
@@ -175,10 +175,10 @@ Discover specialized collections of wildlife reserves, historic monuments, and c
             ].map((category, idx) => (
               <button
                 key={idx}
-                className="bg-white border-2 border-border rounded-xl p-4 text-center hover:border-accent hover:bg-red-50 transition"
+                className="bg-white border-2 border-border rounded-xl px-4 py-3 hover:border-accent hover:bg-red-50 transition flex items-center gap-3 whitespace-nowrap flex-shrink-0"
               >
-                <div className="text-4xl mb-2">{category.icon}</div>
-                <p className="font-semibold text-primary">{category.name}</p>
+                <span className="text-2xl">{category.icon}</span>
+                <p className="text-sm font-semibold text-primary">{category.name}</p>
               </button>
             ))}
           </div>
@@ -256,12 +256,7 @@ Discover specialized collections of wildlife reserves, historic monuments, and c
                           <div className="relative">
             <button
               className="p-1 hover:bg-gray-100 rounded-full"
-              onClick={() =>
-                openDialog({
-                  title: attraction.name,
-                  description: attraction.description
-                })
-              }
+              onClick={() => window.location.href = attraction.url}
             >
               <Info size={18} className="text-primary" />
             </button>
