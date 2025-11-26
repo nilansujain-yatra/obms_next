@@ -1,8 +1,8 @@
 'use client';
 
-import { MapPin, Clock, Eye, Info, Ticket } from "lucide-react";
+import { MapPin, Clock, Eye, Info, Ticket, ChevronLeft, ChevronRight } from "lucide-react";
 import RupeeRating from "../widgets/RuppeRating";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import TooltipPortal from "../widgets/TooltipPortal";
 import InfoDialog from "../widgets/InfoDialog";
 
@@ -23,11 +23,12 @@ interface Attraction {
 export default function TopAttraction() {
 
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
-
-const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
-
-const [dialogOpen, setDialogOpen] = useState(false);
-const [dialogData, setDialogData] = useState({ title: "", description: "" });
+  const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogData, setDialogData] = useState({ title: "", description: "" });
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 function openDialog(data) {
   setDialogData(data);
@@ -45,6 +46,36 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
   setActiveTooltip(key);
 };
 
+const checkScroll = () => {
+  if (scrollContainerRef.current) {
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  }
+};
+
+const scroll = (direction: 'left' | 'right') => {
+  if (scrollContainerRef.current) {
+    const scrollAmount = 320;
+    const newScrollLeft = direction === 'left'
+      ? scrollContainerRef.current.scrollLeft - scrollAmount
+      : scrollContainerRef.current.scrollLeft + scrollAmount;
+
+    scrollContainerRef.current.scrollTo({
+      left: newScrollLeft,
+      behavior: 'smooth'
+    });
+
+    setTimeout(checkScroll, 300);
+  }
+};
+
+useEffect(() => {
+  setTimeout(checkScroll, 100);
+  window.addEventListener('resize', checkScroll);
+  return () => window.removeEventListener('resize', checkScroll);
+}, []);
+
   const attractions: Attraction[] = [
     {
       name: "Ranthambore National Park",
@@ -56,7 +87,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/nationalpark.png",
       price: 1,
       description:"Ranthambore National Park, located in Rajasthan, is a renowned wildlife destination famous for its large population of Bengal tigers. Established as a game sanctuary in 1955 and declared a national park in 1980, it's situated at the junction of the Aravali and Vindhya hill ranges. The park covers approximately 400 sq km and is a major attraction for wildlife safaris, birdwatching, and exploring its historic fort",
-       priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+       priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Rathambore-Tiger-Reserve"
     },
     {
       name: "Hawa Mahal",
@@ -68,7 +100,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/hawamahal.png",
       price: 2,
       description:"The Hawa Mahal, or Palace of Winds, is a five-story pink sandstone building in Jaipur, India, famous for its unique honeycomb-like facade of 953 windows, called jharokhas. Built in 1799 by Maharaja Sawai Pratap Singh, the structure was designed to allow royal women to observe street festivities and daily life unseen. The intricate latticework and numerous windows are a feat of both aesthetic design and clever engineering, creating excellent ventilation",
-            priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+            priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Hawa-mahal"
 
     },
     {
@@ -81,7 +114,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/muesuem.png",
       price: 3,
       description:"Government Central Museum Ajmer",
-             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Government-Central-Museum-Albert-Hall-Jaipur"
 
 
     },
@@ -95,7 +129,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/hawamahal.png",
       price: 2,
       description:"Amer Fort is a magnificent palace complex located in Jaipur, India, known for its blend of indigenous and Mughal architectural styles, constructed from red sandstone and white marble. Situated on a hilltop, this UNESCO World Heritage site features elaborate palaces, ramparts, courtyards, and the famous Sheesh Mahal (mirror palace). ",
-             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Amber-Fort"
 
     },
     {
@@ -108,7 +143,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/muesuem.png",
       price: 4,
       description:"The City Palace in Jaipur is a sprawling complex built by Maharaja Sawai Jai Singh II that showcases a blend of Mughal and Rajput architecture. It houses the City Palace Museum and remains the residence of the royal family, featuring multiple courtyards, gardens, and several buildings, including the official residence of the Maharaja, Chandra Mahal. ",
-             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Government-Central-Museum-Albert-Hall-Jaipur"
 
     },
   ];
@@ -130,19 +166,46 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
           Discover the most sought-after monuments and wildlife experiences in Rajasthan
         </p>
 
-        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-          {attractions.map((attraction, idx) => (
+        <div className="relative flex items-center group">
+          {/* Left Arrow */}
+          <button
+            onClick={() => scroll('left')}
+            disabled={!canScrollLeft}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full transition-all ${
+              canScrollLeft
+                ? 'bg-primary text-white hover:bg-primary/90 cursor-pointer'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+            aria-label="Scroll attractions left"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* Scrollable Container */}
+          <div
+            ref={scrollContainerRef}
+            onScroll={checkScroll}
+            className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide flex-1 px-12"
+          >
+            {attractions.map((attraction, idx) => (
             <div
               key={idx}
               className="min-w-[280px] bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex-shrink-0"
             >
               {/* Image Container with Badges */}
-              <div className="relative h-56 overflow-hidden bg-gray-200">
+              <div className="relative h-56 overflow-hidden bg-gray-200 group/image">
                 <img
                   src={attraction.image}
                   alt={attraction.name}
-                  className="w-full h-full object-cover hover:scale-105 transition duration-300"
+                  className="w-full h-full object-cover group-hover/image:scale-105 transition duration-300"
                 />
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover/image:opacity-100 transition duration-300 flex items-center justify-center cursor-pointer"
+                  onClick={() => window.location.href = attraction.url}
+                >
+                  <span className="text-white text-lg font-semibold">View Details</span>
+                </div>
 
                 {/* Type Badge - Top Left */}
                 <div className="absolute top-2 left-4 bg-green-600 text-white px-2 py-1 rounded-full text-[10px] font-medium">
@@ -176,12 +239,6 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
                 <div className="relative">
   <button
     className="p-1 hover:bg-gray-100 rounded-full"
-    onClick={() =>
-      openDialog({
-        title: attraction.name,
-        description: attraction.description
-      })
-    }
   >
     <Info size={18} className="text-primary" />
   </button>
@@ -259,6 +316,21 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
               </div>
             </div>
           ))}
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => scroll('right')}
+            disabled={!canScrollRight}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full transition-all ${
+              canScrollRight
+                ? 'bg-primary text-white hover:bg-primary/90 cursor-pointer'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+            aria-label="Scroll attractions right"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </div>
     </section>
