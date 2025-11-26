@@ -208,12 +208,12 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
         </div>
       </div>
 
-      <InfoDialog
-  open={dialogOpen}
-  onClose={() => setDialogOpen(false)}
-  title={dialogData.title}
-  description={dialogData.description}
-/>
+                  <InfoDialog
+              open={dialogOpen}
+              onClose={() => setDialogOpen(false)}
+              title={dialogData.title}
+              description={dialogData.description}
+            />
 
 
 
