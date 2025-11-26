@@ -1,7 +1,7 @@
 'use client';
 
-import { Clock, Info, MapPin, Star, Ticket } from "lucide-react";
-import { useState } from "react";
+import { Clock, Info, MapPin, Star, Ticket, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import RupeeRating from "../widgets/RuppeRating";
 import InfoDialog from "../widgets/InfoDialog";
 
@@ -21,11 +21,12 @@ interface Attraction {
 export default function ExploreRajasthan(){
 
     const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
-  
   const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
-  
   const [dialogOpen, setDialogOpen] = useState(false);
-const [dialogData, setDialogData] = useState({ title: "", description: "" });
+  const [dialogData, setDialogData] = useState({ title: "", description: "" });
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 function openDialog(data) {
   setDialogData(data);
@@ -35,14 +36,44 @@ function openDialog(data) {
 
   const showTooltip = (e: React.MouseEvent, key: string) => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-  
+
     setTooltipPos({
       top: rect.top - 10,
       left: rect.left + rect.width / 2
     });
-  
+
     setActiveTooltip(key);
   };
+
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 320;
+      const newScrollLeft = direction === 'left'
+        ? scrollContainerRef.current.scrollLeft - scrollAmount
+        : scrollContainerRef.current.scrollLeft + scrollAmount;
+
+      scrollContainerRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth'
+      });
+
+      setTimeout(checkScroll, 300);
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(checkScroll, 100);
+    window.addEventListener('resize', checkScroll);
+    return () => window.removeEventListener('resize', checkScroll);
+  }, []);
   
    const attractions: Attraction[] = [
     {
@@ -147,7 +178,27 @@ Discover specialized collections of wildlife reserves, historic monuments, and c
             ))}
           </div>
 
-          <div className="flex gap-6 overflow-x-auto pb-4 pt-6 scrollbar-hide">
+          <div className="relative flex items-center group">
+            {/* Left Arrow */}
+            <button
+              onClick={() => scroll('left')}
+              disabled={!canScrollLeft}
+              className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full transition-all ${
+                canScrollLeft
+                  ? 'bg-primary text-white hover:bg-primary/90 cursor-pointer'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+              aria-label="Scroll attractions left"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Scrollable Container */}
+            <div
+              ref={scrollContainerRef}
+              onScroll={checkScroll}
+              className="flex gap-6 overflow-x-auto pb-4 pt-6 scrollbar-hide flex-1 px-12"
+            >
           {attractions.map((attraction, idx) => (
                       <div
                         key={idx}
@@ -276,7 +327,22 @@ Discover specialized collections of wildlife reserves, historic monuments, and c
                         </div>
                       </div>
                     ))}
-        </div>
+            </div>
+
+            {/* Right Arrow */}
+            <button
+              onClick={() => scroll('right')}
+              disabled={!canScrollRight}
+              className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full transition-all ${
+                canScrollRight
+                  ? 'bg-primary text-white hover:bg-primary/90 cursor-pointer'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+              aria-label="Scroll attractions right"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
       </section>
     );
