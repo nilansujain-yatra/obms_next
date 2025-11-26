@@ -2,7 +2,7 @@
 
 import { MapPin, Clock, Eye, Info, Ticket, ChevronLeft, ChevronRight } from "lucide-react";
 import RupeeRating from "../widgets/RuppeRating";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import TooltipPortal from "../widgets/TooltipPortal";
 import InfoDialog from "../widgets/InfoDialog";
 
