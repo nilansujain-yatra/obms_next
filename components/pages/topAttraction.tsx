@@ -23,11 +23,12 @@ interface Attraction {
 export default function TopAttraction() {
 
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
-
-const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
-
-const [dialogOpen, setDialogOpen] = useState(false);
-const [dialogData, setDialogData] = useState({ title: "", description: "" });
+  const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogData, setDialogData] = useState({ title: "", description: "" });
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 function openDialog(data) {
   setDialogData(data);
