@@ -4,6 +4,7 @@ import { MapPin, Clock, Eye, Info, Ticket } from "lucide-react";
 import RupeeRating from "../widgets/RuppeRating";
 import { useState } from "react";
 import TooltipPortal from "../widgets/TooltipPortal";
+import InfoDialog from "../widgets/InfoDialog";
 
 
 interface Attraction {
@@ -16,12 +17,7 @@ interface Attraction {
   image: string;
   price?: number;
   description?:string;
-   priceDetails?: {
-    adult?: number;
-    child?: number;
-    foreigner?: number;
-    student?: number;
-  };
+   priceDetails?:string
 }
 
 export default function TopAttraction() {
@@ -30,6 +26,13 @@ export default function TopAttraction() {
 
 const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
 
+const [dialogOpen, setDialogOpen] = useState(false);
+const [dialogData, setDialogData] = useState({ title: "", description: "" });
+
+function openDialog(data) {
+  setDialogData(data);
+  setDialogOpen(true);
+}
 
 const showTooltip = (e: React.MouseEvent, key: string) => {
   const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
@@ -53,12 +56,7 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/nationalpark.png",
       price: 1,
       description:"Ranthambore National Park, located in Rajasthan, is a renowned wildlife destination famous for its large population of Bengal tigers. Established as a game sanctuary in 1955 and declared a national park in 1980, it's situated at the junction of the Aravali and Vindhya hill ranges. The park covers approximately 400 sq km and is a major attraction for wildlife safaris, birdwatching, and exploring its historic fort",
-       priceDetails: {
-        adult: 200,
-        child: 100,
-        foreigner: 800,
-        student: 150
-      }
+       priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
     },
     {
       name: "Hawa Mahal",
@@ -70,12 +68,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/hawamahal.png",
       price: 2,
       description:"The Hawa Mahal, or Palace of Winds, is a five-story pink sandstone building in Jaipur, India, famous for its unique honeycomb-like facade of 953 windows, called jharokhas. Built in 1799 by Maharaja Sawai Pratap Singh, the structure was designed to allow royal women to observe street festivities and daily life unseen. The intricate latticework and numerous windows are a feat of both aesthetic design and clever engineering, creating excellent ventilation",
-      priceDetails: {
-        adult: 200,
-        child: 100,
-        foreigner: 800,
-        student: 150
-      }
+            priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+
     },
     {
       name: "Government Central Museum",
@@ -87,12 +81,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/muesuem.png",
       price: 3,
       description:"Government Central Museum Ajmer",
-      priceDetails: {
-        adult: 200,
-        child: 100,
-        foreigner: 800,
-        student: 150
-      }
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+
 
     },
     {
@@ -105,12 +95,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/hawamahal.png",
       price: 2,
       description:"Amer Fort is a magnificent palace complex located in Jaipur, India, known for its blend of indigenous and Mughal architectural styles, constructed from red sandstone and white marble. Situated on a hilltop, this UNESCO World Heritage site features elaborate palaces, ramparts, courtyards, and the famous Sheesh Mahal (mirror palace). ",
-      priceDetails: {
-        adult: 200,
-        child: 100,
-        foreigner: 800,
-        student: 150
-      }
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+
     },
     {
       name: "City Palace",
@@ -122,12 +108,8 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
       image: "/images/muesuem.png",
       price: 4,
       description:"The City Palace in Jaipur is a sprawling complex built by Maharaja Sawai Jai Singh II that showcases a blend of Mughal and Rajput architecture. It houses the City Palace Museum and remains the residence of the royal family, featuring multiple courtyards, gardens, and several buildings, including the official residence of the Maharaja, Chandra Mahal. ",
-      priceDetails: {
-        adult: 200,
-        child: 100,
-        foreigner: 800,
-        student: 150
-      }
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150"
+
     },
   ];
 
@@ -192,37 +174,19 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
 
                 {/* INFO ICON */}
                 <div className="relative">
-            <button
-              className="p-1 hover:bg-gray-100 rounded-full"
-              onMouseEnter={(e) => showTooltip(e, `${idx}-info`)}
-              onMouseLeave={() => setActiveTooltip(null)}
-              // onClick={(e) => {
-              //   if (activeTooltip === idx) setActiveTooltip(null);
-              //   else showTooltip(e, idx);
-              // }}
-            >
-              <Info size={18} className="text-primary" />
-            </button>
+  <button
+    className="p-1 hover:bg-gray-100 rounded-full"
+    onClick={() =>
+      openDialog({
+        title: attraction.name,
+        description: attraction.description
+      })
+    }
+  >
+    <Info size={18} className="text-primary" />
+  </button>
+</div>
 
-            {activeTooltip === `${idx}-info` && (
-              <div
-                className="
-                  fixed z-50
-                  p-3 max-w-xs bg-black text-white text-sm border border-gray-700 
-                  rounded-lg shadow-lg animate-fade-in
-                  whitespace-normal break-words
-                "
-                style={{
-                  top: tooltipPos.top,
-                  left: tooltipPos.left,
-                  transform: "translate(-50%, -100%)"
-                }}
-              >
-                {attraction.description}
-              </div>
-            )}
-
-            </div>
 
 
           {/* GOOGLE MAP ICON */}
@@ -243,6 +207,13 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
 
         </div>
       </div>
+
+      <InfoDialog
+  open={dialogOpen}
+  onClose={() => setDialogOpen(false)}
+  title={dialogData.title}
+  description={dialogData.description}
+/>
 
 
 
@@ -268,50 +239,18 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
                   <span className="text-gray-300 mx-2">•</span>
 
                   {/* Price */}
-                  <div className="relative">
-                  <div
-                    className="flex items-center gap-1 cursor-pointer"
-                    onMouseEnter={(e) => showTooltip(e, `${idx}-price`)}
-                    onMouseLeave={() => setActiveTooltip(null)}
-                    // onClick={(e) => {
-                    //   if (activeTooltip === `${idx}-price`) setActiveTooltip(null)
-                    //   else showTooltip(e, `${idx}-price`)
-                    // }}
-                  >
+                   <button
+    className="p-1 hover:bg-gray-100 rounded-full"
+    onClick={() =>
+      openDialog({
+        title: attraction.name,
+        description: attraction.priceDetails
+      })
+    }
+  >
                     <RupeeRating value={attraction.price} />
-                  </div>
-
-                  {/* PRICE TOOLTIP */}
-                  {activeTooltip === `${idx}-price` && (
-                    <div
-                      className="
-                        fixed z-50
-                        p-3 bg-black text-white text-sm border border-gray-700 
-                        rounded-lg shadow-lg max-w-xs whitespace-normal break-words
-                      "
-                      style={{
-                        top: tooltipPos.top,
-                        left: tooltipPos.left,
-                        transform: "translate(-50%, -100%)"
-                      }}
-                    >
-                      <div className="space-y-1">
-                        {attraction.priceDetails?.adult && (
-                          <p>Adult: ₹{attraction.priceDetails.adult}</p>
-                        )}
-                        {attraction.priceDetails?.child && (
-                          <p>Child: ₹{attraction.priceDetails.child}</p>
-                        )}
-                        {attraction.priceDetails?.foreigner && (
-                          <p>Foreigner: ₹{attraction.priceDetails.foreigner}</p>
-                        )}
-                        {attraction.priceDetails?.student && (
-                          <p>Student: ₹{attraction.priceDetails.student}</p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
+  </button>
+                  
 
                 </div>
 
