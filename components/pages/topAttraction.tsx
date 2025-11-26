@@ -46,6 +46,30 @@ const showTooltip = (e: React.MouseEvent, key: string) => {
   setActiveTooltip(key);
 };
 
+const checkScroll = () => {
+  if (scrollContainerRef.current) {
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  }
+};
+
+const scroll = (direction: 'left' | 'right') => {
+  if (scrollContainerRef.current) {
+    const scrollAmount = 320;
+    const newScrollLeft = direction === 'left'
+      ? scrollContainerRef.current.scrollLeft - scrollAmount
+      : scrollContainerRef.current.scrollLeft + scrollAmount;
+
+    scrollContainerRef.current.scrollTo({
+      left: newScrollLeft,
+      behavior: 'smooth'
+    });
+
+    setTimeout(checkScroll, 300);
+  }
+};
+
   const attractions: Attraction[] = [
     {
       name: "Ranthambore National Park",
