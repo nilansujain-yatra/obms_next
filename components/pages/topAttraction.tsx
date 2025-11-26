@@ -155,8 +155,28 @@ const scroll = (direction: 'left' | 'right') => {
           Discover the most sought-after monuments and wildlife experiences in Rajasthan
         </p>
 
-        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-          {attractions.map((attraction, idx) => (
+        <div className="relative flex items-center group">
+          {/* Left Arrow */}
+          <button
+            onClick={() => scroll('left')}
+            disabled={!canScrollLeft}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full transition-all ${
+              canScrollLeft
+                ? 'bg-primary text-white hover:bg-primary/90 cursor-pointer'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+            aria-label="Scroll attractions left"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* Scrollable Container */}
+          <div
+            ref={scrollContainerRef}
+            onScroll={checkScroll}
+            className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide flex-1 px-12"
+          >
+            {attractions.map((attraction, idx) => (
             <div
               key={idx}
               className="min-w-[280px] bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex-shrink-0"
@@ -284,6 +304,21 @@ const scroll = (direction: 'left' | 'right') => {
               </div>
             </div>
           ))}
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => scroll('right')}
+            disabled={!canScrollRight}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full transition-all ${
+              canScrollRight
+                ? 'bg-primary text-white hover:bg-primary/90 cursor-pointer'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+            aria-label="Scroll attractions right"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </div>
     </section>
