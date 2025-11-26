@@ -256,12 +256,7 @@ Discover specialized collections of wildlife reserves, historic monuments, and c
                           <div className="relative">
             <button
               className="p-1 hover:bg-gray-100 rounded-full"
-              onClick={() =>
-                openDialog({
-                  title: attraction.name,
-                  description: attraction.description
-                })
-              }
+              onClick={() => window.location.href = attraction.url}
             >
               <Info size={18} className="text-primary" />
             </button>
