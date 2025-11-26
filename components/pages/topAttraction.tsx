@@ -70,6 +70,12 @@ const scroll = (direction: 'left' | 'right') => {
   }
 };
 
+useEffect(() => {
+  setTimeout(checkScroll, 100);
+  window.addEventListener('resize', checkScroll);
+  return () => window.removeEventListener('resize', checkScroll);
+}, []);
+
   const attractions: Attraction[] = [
     {
       name: "Ranthambore National Park",
