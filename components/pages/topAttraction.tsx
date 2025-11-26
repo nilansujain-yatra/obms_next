@@ -188,12 +188,24 @@ useEffect(() => {
               className="min-w-[280px] bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex-shrink-0"
             >
               {/* Image Container with Badges */}
-              <div className="relative h-56 overflow-hidden bg-gray-200">
+              <div className="relative h-56 overflow-hidden bg-gray-200 group/image">
                 <img
                   src={attraction.image}
                   alt={attraction.name}
-                  className="w-full h-full object-cover hover:scale-105 transition duration-300"
+                  className="w-full h-full object-cover group-hover/image:scale-105 transition duration-300"
                 />
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover/image:opacity-100 transition duration-300 flex items-center justify-center cursor-pointer"
+                  onClick={() =>
+                    openDialog({
+                      title: attraction.name,
+                      description: attraction.description
+                    })
+                  }
+                >
+                  <span className="text-white text-lg font-semibold">View Details</span>
+                </div>
 
                 {/* Type Badge - Top Left */}
                 <div className="absolute top-2 left-4 bg-green-600 text-white px-2 py-1 rounded-full text-[10px] font-medium">
