@@ -239,6 +239,7 @@ useEffect(() => {
                 <div className="relative">
   <button
     className="p-1 hover:bg-gray-100 rounded-full"
+    onClick={() => window.location.href = attraction.url}
   >
     <Info size={18} className="text-primary" />
   </button>
