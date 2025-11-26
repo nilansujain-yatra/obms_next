@@ -202,7 +202,7 @@ useEffect(() => {
 
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-black/70 opacity-0 group-hover/image:opacity-100 transition duration-300 flex items-center justify-center cursor-pointer"
-                  onClick={() => window.open(attraction.url, '_blank')}
+                  onClick={() => window.location.href = attraction.url}
                 >
                   <span className="text-white text-lg font-semibold">View Details</span>
                 </div>
