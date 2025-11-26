@@ -1,8 +1,8 @@
 'use client';
 
-import { MapPin, Clock, Eye, Info, Ticket } from "lucide-react";
+import { MapPin, Clock, Eye, Info, Ticket, ChevronLeft, ChevronRight } from "lucide-react";
 import RupeeRating from "../widgets/RuppeRating";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import TooltipPortal from "../widgets/TooltipPortal";
 import InfoDialog from "../widgets/InfoDialog";
 
