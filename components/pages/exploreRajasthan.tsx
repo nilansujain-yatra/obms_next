@@ -53,34 +53,54 @@ function openDialog(data) {
     setActiveTooltip(key);
   };
 
-  const checkScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  const checkScroll = (tab: string) => {
+    const container = scrollContainerRefs.current[tab];
+    if (container) {
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      setScrollStates(prev => ({
+        ...prev,
+        [tab]: {
+          canScrollLeft: scrollLeft > 0,
+          canScrollRight: scrollLeft < scrollWidth - clientWidth - 10
+        }
+      }));
     }
   };
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
+  const scroll = (tab: string, direction: 'left' | 'right') => {
+    const container = scrollContainerRefs.current[tab];
+    if (container) {
       const scrollAmount = 320;
       const newScrollLeft = direction === 'left'
-        ? scrollContainerRef.current.scrollLeft - scrollAmount
-        : scrollContainerRef.current.scrollLeft + scrollAmount;
+        ? container.scrollLeft - scrollAmount
+        : container.scrollLeft + scrollAmount;
 
-      scrollContainerRef.current.scrollTo({
+      container.scrollTo({
         left: newScrollLeft,
         behavior: 'smooth'
       });
 
-      setTimeout(checkScroll, 300);
+      setTimeout(() => checkScroll(tab), 300);
     }
   };
 
   useEffect(() => {
-    setTimeout(checkScroll, 100);
-    window.addEventListener('resize', checkScroll);
-    return () => window.removeEventListener('resize', checkScroll);
+    setTimeout(() => {
+      checkScroll('wildlife');
+      checkScroll('monuments');
+      checkScroll('museums');
+      checkScroll('other');
+    }, 100);
+
+    const handleResize = () => {
+      checkScroll('wildlife');
+      checkScroll('monuments');
+      checkScroll('museums');
+      checkScroll('other');
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
   
    const attractions: Attraction[] = [
