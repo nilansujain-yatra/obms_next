@@ -88,14 +88,12 @@ function openDialog(data) {
       checkScroll('wildlife');
       checkScroll('monuments');
       checkScroll('museums');
-      checkScroll('other');
     }, 100);
 
     const handleResize = () => {
       checkScroll('wildlife');
       checkScroll('monuments');
       checkScroll('museums');
-      checkScroll('other');
     };
 
     window.addEventListener('resize', handleResize);
