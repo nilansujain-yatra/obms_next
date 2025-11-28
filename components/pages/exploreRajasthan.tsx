@@ -442,17 +442,23 @@ function openDialog(data) {
           </p>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="flex gap-2 bg-transparent border-b border-gray-200 h-auto p-0 rounded-none">
+            <TabsList className="flex gap-6 bg-transparent border-b border-gray-300 h-auto p-0 rounded-none w-fit">
               {categoryTabs.map((tab) => (
                 <TabsTrigger
                   key={tab.id}
                   value={tab.id}
-                  className="flex items-center gap-2 px-4 py-3 rounded-t-lg border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-red-50 hover:bg-gray-50 transition"
+                  className="px-0 py-2 rounded-none border-b-2 border-transparent text-sm font-medium text-gray-600 data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent hover:text-primary transition"
                 >
-                  <span className="text-2xl">{tab.icon}</span>
-                  <span className="text-sm font-semibold text-primary hidden sm:inline">{tab.name}</span>
+                  {tab.name}
                 </TabsTrigger>
               ))}
+              <a
+                href="#"
+                className="px-0 py-2 text-sm font-medium text-gray-600 hover:text-primary transition flex items-center gap-1"
+              >
+                View more
+                <span className="text-xs">→</span>
+              </a>
             </TabsList>
 
             {categoryTabs.map((tab) => (
