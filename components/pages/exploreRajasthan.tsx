@@ -26,9 +26,15 @@ export default function ExploreRajasthan(){
   const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState({ title: "", description: "" });
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeTab, setActiveTab] = useState("wildlife");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const [scrollStates, setScrollStates] = useState<{ [key: string]: { canScrollLeft: boolean; canScrollRight: boolean } }>({
+    wildlife: { canScrollLeft: false, canScrollRight: true },
+    monuments: { canScrollLeft: false, canScrollRight: true },
+    museums: { canScrollLeft: false, canScrollRight: true },
+    other: { canScrollLeft: false, canScrollRight: true }
+  });
 
 function openDialog(data) {
   setDialogData(data);
