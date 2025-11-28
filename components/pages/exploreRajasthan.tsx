@@ -291,10 +291,9 @@ function openDialog(data) {
   
   
   const categoryTabs = [
-    { id: "wildlife", name: "Wildlife", icon: "🦁" },
-    { id: "monuments", name: "Monuments", icon: "🏛️" },
-    { id: "museums", name: "Museums", icon: "🎨" },
-    { id: "other", name: "Other Sites", icon: "🏞️" },
+    { id: "wildlife", name: "Wildlife" },
+    { id: "monuments", name: "Monuments" },
+    { id: "museums", name: "Museums" },
   ];
 
   const getAttractionsByType = (type: string) => {
@@ -302,7 +301,6 @@ function openDialog(data) {
       wildlife: "Wildlife",
       monuments: "Monument",
       museums: "Museum",
-      other: "Other Sites"
     };
     return attractions.filter(attr => attr.type === typeMap[type]);
   };
