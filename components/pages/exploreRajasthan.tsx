@@ -98,6 +98,32 @@ function openDialog(data) {
       url: "http://10.70.235.180:30201/place-details/Rathambore-Tiger-Reserve"
     },
     {
+      name: "Keoladeo National Park",
+      type: "Wildlife",
+      location: "Bharatpur",
+      duration: "3-4 Hours",
+      rating: 4.4,
+      reviews: 9500,
+      image: "/images/nationalpark.png",
+      price: 1,
+      description:"Keoladeo National Park, also known as Keoladeo Ghana National Park, is a major birdwatching destination in Bharatpur, Rajasthan. This UNESCO World Heritage Site is home to over 370 bird species and serves as an important wintering ground for migratory birds from Central Asia.",
+       priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Keoladeo-National-Park"
+    },
+    {
+      name: "Desert National Park",
+      type: "Wildlife",
+      location: "Jaisalmer",
+      duration: "4-5 Hours",
+      rating: 4.3,
+      reviews: 7800,
+      image: "/images/nationalpark.png",
+      price: 1,
+      description:"Desert National Park is a vast expanse of desert landscape in Jaisalmer, home to various wildlife species including blackbucks, Indian wolves, and many bird species.",
+       priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Desert-National-Park"
+    },
+    {
       name: "Hawa Mahal",
       type: "Monument",
       location: "Jaipur City Center",
@@ -109,22 +135,6 @@ function openDialog(data) {
       description:"The Hawa Mahal, or Palace of Winds, is a five-story pink sandstone building in Jaipur, India, famous for its unique honeycomb-like facade of 953 windows, called jharokhas. Built in 1799 by Maharaja Sawai Pratap Singh, the structure was designed to allow royal women to observe street festivities and daily life unseen. The intricate latticework and numerous windows are a feat of both aesthetic design and clever engineering, creating excellent ventilation",
             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
       url: "http://10.70.235.180:30201/place-details/Hawa-mahal"
-
-    },
-    {
-      name: "Government Central Museum",
-      type: "Museum",
-      location: "Ajmer",
-      duration: "2 Hours",
-      rating: 4.6,
-      reviews: 8000,
-      image: "/images/muesuem.png",
-      price: 3,
-      description:"Government Central Museum Ajmer",
-             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
-      url: "http://10.70.235.180:30201/place-details/Government-Central-Museum-Albert-Hall-Jaipur"
-
-
     },
     {
       name: "Amber Fort",
@@ -138,11 +148,75 @@ function openDialog(data) {
       description:"Amer Fort is a magnificent palace complex located in Jaipur, India, known for its blend of indigenous and Mughal architectural styles, constructed from red sandstone and white marble. Situated on a hilltop, this UNESCO World Heritage site features elaborate palaces, ramparts, courtyards, and the famous Sheesh Mahal (mirror palace). ",
              priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
       url: "http://10.70.235.180:30201/place-details/Amber-Fort"
-
+    },
+    {
+      name: "Mehrangarh Fort",
+      type: "Monument",
+      location: "Jodhpur",
+      duration: "3-4 Hours",
+      rating: 4.8,
+      reviews: 13000,
+      image: "/images/hawamahal.png",
+      price: 2,
+      description:"Mehrangarh Fort is a colossal fort standing 125 meters above the city of Jodhpur. Built in 1459, it is one of the largest forts in India and features intricate latticed screens, apartments with filigree windows, and panoramic city views.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Mehrangarh-Fort"
+    },
+    {
+      name: "Chittorgarh Fort",
+      type: "Monument",
+      location: "Chittorgarh",
+      duration: "4-5 Hours",
+      rating: 4.6,
+      reviews: 10500,
+      image: "/images/hawamahal.png",
+      price: 2,
+      description:"Chittorgarh Fort is a vast fortified complex representing Rajput bravery and pride. Built in the 8th century, it has witnessed many historic events and contains temples, palaces, and towers showcasing Rajasthani architecture.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Chittorgarh-Fort"
+    },
+    {
+      name: "Government Central Museum",
+      type: "Museum",
+      location: "Ajmer",
+      duration: "2 Hours",
+      rating: 4.6,
+      reviews: 8000,
+      image: "/images/muesuem.png",
+      price: 3,
+      description:"Government Central Museum Ajmer houses a collection of sculptures, manuscripts, and artifacts reflecting the rich cultural heritage of Rajasthan.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Government-Central-Museum-Albert-Hall-Jaipur"
+    },
+    {
+      name: "Albert Hall Museum",
+      type: "Museum",
+      location: "Jaipur",
+      duration: "2-3 Hours",
+      rating: 4.5,
+      reviews: 9200,
+      image: "/images/muesuem.png",
+      price: 3,
+      description:"Albert Hall Museum is the oldest museum in Jaipur, showcasing artifacts from ancient times to the modern era, including sculptures, paintings, and decorative arts.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Albert-Hall-Museum"
+    },
+    {
+      name: "City Palace Museum",
+      type: "Museum",
+      location: "Jaipur",
+      duration: "2 Hours",
+      rating: 4.7,
+      reviews: 11000,
+      image: "/images/muesuem.png",
+      price: 3,
+      description:"City Palace Museum displays royal artifacts, textiles, manuscripts, and historical documents belonging to the royal family of Jaipur.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/City-Palace-Museum"
     },
     {
       name: "City Palace",
-      type: "Palace",
+      type: "Monument",
       location: "Jaipur",
       duration: "2-3 Hours",
       rating: 4.8,
@@ -152,7 +226,45 @@ function openDialog(data) {
       description:"The City Palace in Jaipur is a sprawling complex built by Maharaja Sawai Jai Singh II that showcases a blend of Mughal and Rajput architecture. It houses the City Palace Museum and remains the residence of the royal family, featuring multiple courtyards, gardens, and several buildings, including the official residence of the Maharaja, Chandra Mahal. ",
              priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
       url: "http://10.70.235.180:30201/place-details/Government-Central-Museum-Albert-Hall-Jaipur"
-
+    },
+    {
+      name: "Jaisalmer Fort",
+      type: "Other Sites",
+      location: "Jaisalmer",
+      duration: "3-4 Hours",
+      rating: 4.7,
+      reviews: 12000,
+      image: "/images/hawamahal.png",
+      price: 2,
+      description:"Jaisalmer Fort is a magnificent fort city made of golden sandstone, featuring intricate architecture and stunning views of the desert landscape.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Jaisalmer-Fort"
+    },
+    {
+      name: "Udaipur City Palace",
+      type: "Other Sites",
+      location: "Udaipur",
+      duration: "3-4 Hours",
+      rating: 4.8,
+      reviews: 14000,
+      image: "/images/muesuem.png",
+      price: 3,
+      description:"Udaipur City Palace is a stunning lakeside palace overlooking Lake Pichola, combining Mughal and Rajasthani architecture with magnificent courtyards and gardens.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Udaipur-City-Palace"
+    },
+    {
+      name: "Lake Pichola",
+      type: "Other Sites",
+      location: "Udaipur",
+      duration: "2-3 Hours",
+      rating: 4.6,
+      reviews: 11500,
+      image: "/images/nationalpark.png",
+      price: 1,
+      description:"Lake Pichola is an artificial lake in Udaipur, surrounded by palaces and gardens, offering scenic boat rides and stunning sunset views.",
+             priceDetails:"Adult : 200 \n Child: 100 \n Foreigner: 900 \n Student: 150",
+      url: "http://10.70.235.180:30201/place-details/Lake-Pichola"
     },
   ];
 
