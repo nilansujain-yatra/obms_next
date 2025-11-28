@@ -2,6 +2,7 @@
 
 import { Clock, Info, MapPin, Star, Ticket, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import RupeeRating from "../widgets/RuppeRating";
 import InfoDialog from "../widgets/InfoDialog";
 
