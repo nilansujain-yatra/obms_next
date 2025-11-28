@@ -32,8 +32,7 @@ export default function ExploreRajasthan(){
   const [scrollStates, setScrollStates] = useState<{ [key: string]: { canScrollLeft: boolean; canScrollRight: boolean } }>({
     wildlife: { canScrollLeft: false, canScrollRight: true },
     monuments: { canScrollLeft: false, canScrollRight: true },
-    museums: { canScrollLeft: false, canScrollRight: true },
-    other: { canScrollLeft: false, canScrollRight: true }
+    museums: { canScrollLeft: false, canScrollRight: true }
   });
 
 function openDialog(data) {
