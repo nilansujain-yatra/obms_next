@@ -13,6 +13,7 @@ interface Attraction {
   rating: number;
   reviews: number;
   image: string;
+  url: string;
   price?: number;
   description?:string;
    priceDetails?:string
