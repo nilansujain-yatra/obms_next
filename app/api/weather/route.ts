@@ -14,23 +14,27 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
-    );
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+    console.log(`Fetching weather for ${city} with key ending in ${apiKey.slice(-4)}`);
+
+    const response = await fetch(url);
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Weather API error for ${city}: ${response.status}`, errorText);
       return NextResponse.json(
-        { error: `Weather API error: ${response.status}` },
+        { error: `Weather API error: ${response.status}`, details: errorText },
         { status: response.status }
       );
     }
 
     const data = await response.json();
+    console.log(`Successfully fetched weather for ${city}`);
     return NextResponse.json(data);
   } catch (error) {
     console.error('Weather API error:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch weather data' },
+      { error: 'Failed to fetch weather data', details: String(error) },
       { status: 500 }
     );
   }
