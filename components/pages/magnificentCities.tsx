@@ -273,6 +273,12 @@ export default function MagnificientCities() {
                 </>
               ) : null}
 
+              {!loading && !weather && (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-yellow-700">Weather data is loading...</p>
+                </div>
+              )}
+
               <p className="text-sm text-muted-foreground mb-4">
                 {currentCity.description}
               </p>
