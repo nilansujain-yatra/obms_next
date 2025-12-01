@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useWeather } from '@/hooks/use-weather';
-import { ChevronLeft, ChevronRight, Cloud, Droplets, Wind } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Cloud, Droplets, Wind, Eye, Gauge, Compass, Sunrise, Sunset, CloudRain } from 'lucide-react';
 
 const RAJASTHAN_CITIES = [
   {
