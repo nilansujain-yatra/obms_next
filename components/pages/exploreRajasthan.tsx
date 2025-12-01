@@ -302,130 +302,153 @@ function openDialog(data) {
     return attractions.filter(attr => attr.type === typeMap[type]);
   };
 
+   const openInMaps = (place: string) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+    window.open(url, "_blank");
+    };
+
   const renderAttractionCard = (attraction: Attraction, idx: number) => (
     <div
-      key={idx}
-      className="min-w-[280px] bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex-shrink-0"
-    >
-      {/* Image Container with Badges */}
-      <div className="relative h-56 overflow-hidden bg-gray-200 group/image">
-        <img
-          src={attraction.image}
-          alt={attraction.name}
-          className="w-full h-full object-cover group-hover/image:scale-105 transition duration-300"
-        />
-
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover/image:opacity-100 transition duration-300 flex items-center justify-center cursor-pointer"
-          onClick={() => window.location.href = attraction.url}
-        >
-          <span className="text-white text-lg font-semibold">View Details</span>
-        </div>
-
-        {/* Type Badge - Top Left */}
-        <div className="absolute top-2 left-4 bg-green-600 text-white px-2 py-1 rounded-full text-[10px] font-medium">
-          {attraction.type.toUpperCase()}
-        </div>
-
-        {/* Rating Badge - Top Right */}
-        <div className="absolute top-2 right-4 bg-white text-primary px-2 py-1 rounded-full flex items-center gap-2 shadow-lg">
-          <Ticket size={14} className="text-primary" />
-          <span className="text-[12px] text-primary font-semibold">
-            ({(attraction.reviews / 1000).toFixed(0)}K)
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-5">
-        {/* Title , Info , Google map*/}
-        <div className="flex items-start justify-between mb-4 relative">
-
-        {/* Title */}
-        <h4 className="text-lg font-bold text-primary line-clamp-2 pr-2">
-          {attraction.name}
-        </h4>
-
-      {/* Icons Right */}
-      <div className="flex items-center gap-3 flex-shrink-0">
-
-        {/* INFO ICON */}
-        <div className="relative">
-          <button
-            className="p-1 hover:bg-gray-100 rounded-full"
-            onClick={() => window.location.href = attraction.url}
-          >
-            <Info size={18} className="text-primary" />
-          </button>
-        </div>
-
-        {/* GOOGLE MAP ICON */}
-        <button
-          className="p-1 hover:bg-gray-100 rounded-full"
-          onClick={() => {
-            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(attraction.name)}`;
-            window.open(url, "_blank");
-          }}
-        >
-          <MapPin size={18} className="text-primary" />
-        </button>
-
-         {/* BOOK NOW ICON */}
-        <button
-          className="p-1 hover:bg-green-100 rounded-full"
-          onClick={() => alert(`Booking soon available for ${attraction.name}!`)}
-        >
-          <Ticket size={18} className="text-primary" />
-        </button>
-
-      </div>
+                  key={idx}
+                  className="
+                   w-[350px]            /* ✅ FIXED WIDTH */
+                   h-[300px]  
+                   bg-white
+                   rounded-3xl
+                   overflow-hidden
+                    shadow-lg
+                     hover:shadow-xl\
+                      transition-all
+                       duration-300
+                        border border-gray-100 flex-shrink-0
+                        flex 
+                        flex-col "
+                >
+                  {/* Image Container with Badges */}
+                  <div className="relative h-[220px] w-full overflow-hidden bg-gray-200 group/image">
+                    <img
+                      src={attraction.image}
+                      alt={attraction.name}
+                      className="w-full h-full object-cover group-hover/image:scale-105 transition duration-300"
+                    />
+    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover/image:opacity-100 transition duration-300 flex items-center justify-center cursor-pointer"
+                      onClick={() => window.location.href = attraction.url}
+                    >
+                      <span className="text-white text-lg font-semibold">View Details</span>
+                    </div>
+    
+                    {/* Type Badge - Top Left */}
+                    <div className="absolute top-2 left-4 bg-green-600 text-white px-2 py-1 rounded-full text-[10px] font-medium">
+                      {attraction.type.toUpperCase()}
+                    </div>
+    
+                    {/* Rating Badge - Top Right */}
+                    <div className="absolute top-2 right-4 bg-white text-primary px-2 py-1 rounded-full flex items-center gap-2 shadow-lg">
+                      {/* <span className="font-semibold text-[12px]">{attraction.rating}</span> */}
+                      <Ticket size={14} className="text-primary" />
+                      <span className="text-[12px] text-primary font-semibold">
+                        ({(attraction.reviews / 1000).toFixed(0)}K)
+                      </span>
+                    </div>
+                  </div>
+    
+                  {/* Content */}
+                  <div className="p-5">
+                    {/* Title , Info , Google map*/}
+                    <div className="flex items-start justify-between mb-4 relative">
+    
+                    {/* Title */}
+                    <h4 className="text-lg font-bold text-primary truncate pr-2">
+                      {attraction.name}
+                    </h4>
+    
+                  {/* Icons Right */}
+                  <div className="flex items-center gap-3 flex-shrink-0">
+    
+                    {/* INFO ICON */}
+                    <div className="relative">
+      <button
+        className="p-1 hover:bg-gray-100 rounded-full"
+         onClick={() => window.location.href = attraction.url}
+    
+      >
+        <Info size={18} className="text-primary" />
+      </button>
     </div>
-
-      <InfoDialog
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-        title={dialogData.title}
-        description={dialogData.description}
-      />
-
-      {/* Location, Duration, Price */}
-      <div className="flex items-center justify-between text-sm text-muted-foreground mt-3">
-
-        {/* Location */}
-        <div className="flex items-center gap-1 min-w-0">
-          <MapPin size={16} className="text-primary shrink-0" />
-          <span className="font-medium truncate">{attraction.location}</span>
-        </div>
-
-        {/* Separator */}
-        <span className="text-gray-300 mx-2">•</span>
-
-        {/* Duration */}
-        <div className="flex items-center gap-1 min-w-0">
-          <Clock size={16} className="text-primary shrink-0" />
-          <span className="font-medium truncate">{attraction.duration}</span>
-        </div>
-
-        {/* Separator */}
-        <span className="text-gray-300 mx-2">•</span>
-
-        {/* Price */}
-         <button
-          className="p-1 hover:bg-gray-100 rounded-full"
-          onClick={() =>
-            openDialog({
-              title: attraction.name,
-              description: attraction.priceDetails
-            })
-          }
-        >
-          <RupeeRating value={attraction.price} />
-        </button>
-
-      </div>
-
-    </div>
-  </div>
+    
+    
+    
+              {/* GOOGLE MAP ICON */}
+              <button
+                className="p-1 hover:bg-gray-100 rounded-full"
+                onClick={() => openInMaps(attraction.name)}
+              >
+                <MapPin size={18} className="text-primary" />
+              </button>
+    
+               {/* BOOK NOW ICON */}
+              <button
+                className="p-1 hover:bg-green-100 rounded-full"
+                onClick={() => alert(`Booking soon available for ${attraction.name}!`)}
+              >
+                <Ticket size={18} className="text-primary" />
+              </button>
+    
+            </div>
+          </div>
+    
+                      <InfoDialog
+                  open={dialogOpen}
+                  onClose={() => setDialogOpen(false)}
+                  title={dialogData.title}
+                  description={dialogData.description}
+                />
+    
+    
+    
+                    {/* Location, Duration, Price */}
+                      <div className="mt-auto flex items-center justify-between text-sm text-muted-foreground">
+    
+                      {/* Location */}
+                      <div className="flex items-center gap-1 min-w-0 max-w-[30%]">
+                        <MapPin size={16} className="text-primary shrink-0" />
+                        <span className="font-medium truncate">{attraction.location}</span>
+                      </div>
+    
+                      {/* Separator */}
+                      <span className="text-gray-300 mx-2">•</span>
+    
+                      {/* Duration */}
+                      <div className="flex items-center gap-1 min-w-0 max-w-[30%]">
+                        <Clock size={16} className="text-primary shrink-0" />
+                        <span className="font-medium truncate">{attraction.duration}</span>
+                      </div>
+    
+                      {/* Separator */}
+                      <span className="text-gray-300 mx-2">•</span>
+    
+                      {/* Price */}
+                       <button
+        className="p-1 hover:bg-gray-100 rounded-full"
+        onClick={() =>
+          openDialog({
+            title: attraction.name,
+            description: attraction.priceDetails
+          })
+        }
+      >
+                        <RupeeRating value={attraction.price} />
+      </button>
+                      
+    
+                    </div>
+    
+    
+    
+                  </div>
+                </div>
 );
 
     return (

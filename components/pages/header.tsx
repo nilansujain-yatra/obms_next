@@ -50,7 +50,7 @@ export default function Header(){
              <img
                     src="/images/searchIcon.png"
                     alt="Search"
-                    className="w-5 h-5 object-contain"
+                    className="w-10 h-10 object-contain"
                     /> 
 
             <button className="hidden sm:block bg-accent text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition bg-primary">

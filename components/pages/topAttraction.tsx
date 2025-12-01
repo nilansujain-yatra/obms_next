@@ -160,12 +160,31 @@ useEffect(() => {
   return (
     <section className="py-16 sm:py-10 px-4">
       <div className="max-w-7xl mx-auto">
-        <h3 className="text-3xl sm:text-4xl font-bold text-primary mb-2">
-          Top Attractions
-        </h3>
-        <p className="text-muted-foreground mb-12 text-black text-3xs sm:text-4xs">
-          Discover the most sought-after monuments and wildlife experiences in Rajasthan
-        </p>
+            <div className="flex justify-between items-center mb-12">
+  
+                {/* Left Side: Title + Subtitle */}
+                <div>
+                  <h3 className="text-3xl sm:text-4xl font-bold text-primary mb-2">
+                    Top Attractions
+                  </h3>
+
+                  <p className="text-muted-foreground text-black text-3xs sm:text-4xs">
+                    Discover the most sought-after monuments and wildlife experiences in Rajasthan
+                  </p>
+                </div>
+
+                {/* Right Side: Vertically Centered Explore */}
+                <a
+                  href="/explore"
+                  className="flex items-center gap-2 text-primary font-semibold 
+                            hover:underline underline-offset-4 transition"
+                >
+                  Explore
+                  <span className="text-lg">→</span>
+                </a>
+
+              </div>
+
 
         <div className="relative flex items-center group">
           {/* Left Arrow */}
@@ -191,10 +210,22 @@ useEffect(() => {
             {attractions.map((attraction, idx) => (
             <div
               key={idx}
-              className="min-w-[280px] bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex-shrink-0"
+              className="
+               w-[350px]            /* ✅ FIXED WIDTH */
+               h-[300px]  
+               bg-white
+               rounded-3xl
+               overflow-hidden
+                shadow-lg
+                 hover:shadow-xl\
+                  transition-all
+                   duration-300
+                    border border-gray-100 flex-shrink-0
+                    flex 
+                    flex-col "
             >
               {/* Image Container with Badges */}
-              <div className="relative h-56 overflow-hidden bg-gray-200 group/image">
+              <div className="relative h-[220px] w-full overflow-hidden bg-gray-200 group/image">
                 <img
                   src={attraction.image}
                   alt={attraction.name}
@@ -229,7 +260,7 @@ useEffect(() => {
                 <div className="flex items-start justify-between mb-4 relative">
 
                 {/* Title */}
-                <h4 className="text-lg font-bold text-primary line-clamp-2 pr-2">
+                <h4 className="text-lg font-bold text-primary truncate pr-2">
                   {attraction.name}
                 </h4>
 
@@ -278,10 +309,10 @@ useEffect(() => {
 
 
                 {/* Location, Duration, Price */}
-                <div className="flex items-center justify-between text-sm text-muted-foreground mt-3">
+                  <div className="mt-auto flex items-center justify-between text-sm text-muted-foreground">
 
                   {/* Location */}
-                  <div className="flex items-center gap-1 min-w-0">
+                  <div className="flex items-center gap-1 min-w-0 max-w-[30%]">
                     <MapPin size={16} className="text-primary shrink-0" />
                     <span className="font-medium truncate">{attraction.location}</span>
                   </div>
@@ -290,7 +321,7 @@ useEffect(() => {
                   <span className="text-gray-300 mx-2">•</span>
 
                   {/* Duration */}
-                  <div className="flex items-center gap-1 min-w-0">
+                  <div className="flex items-center gap-1 min-w-0 max-w-[30%]">
                     <Clock size={16} className="text-primary shrink-0" />
                     <span className="font-medium truncate">{attraction.duration}</span>
                   </div>

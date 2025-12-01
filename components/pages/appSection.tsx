@@ -2,11 +2,12 @@ import { Building2, Calendar, CheckCircle, Map } from "lucide-react";
 
 export default function AppSection(){
     return (
-        <section className="py-16 sm:py-24 px-4 bg-primary text-white">
+        <section className="py-16 sm:py-10 px-20  text-white ">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-gradient-to-b from-[#6A1815] to-[#AC4440]
+  py-20 px-20 rounded-2xl">
             <div>
-              <h3 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight">
+              <h3 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight ">
                 Your Rajasthan Trip,<br />One Tap Away
               </h3>
               <p className="text-base sm:text-lg opacity-90 mb-8">
@@ -61,49 +62,15 @@ export default function AppSection(){
               <div className="relative w-full max-w-sm">
                 <div className="flex flex-col items-center gap-6">
                   {/* QR Code */}
-                  <div className="w-48 h-48 bg-white rounded-2xl p-4 shadow-xl flex items-center justify-center">
+                  <div className=" rounded-2xl p-4 shadow-xl flex items-center justify-center">
                     <img 
-                      src="https://via.placeholder.com/180?text=QR+Code" 
+                      src="/images/apps.png" 
                       alt="QR Code" 
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
 
-                  {/* Phone Mockup */}
-                  <div className="relative">
-                    <div className="w-48 bg-black rounded-3xl shadow-2xl overflow-hidden border-8 border-black">
-                      {/* Phone notch */}
-                      <div className="h-6 bg-black relative">
-                        <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-black rounded-b-2xl"></div>
-                      </div>
-                      {/* Phone screen */}
-                      <div className="bg-white h-96 flex items-center justify-center">
-                        <img 
-                          src="https://via.placeholder.com/180x360?text=App+Screen" 
-                          alt="App Screen" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Download Buttons */}
-                  <div className="flex flex-col gap-3 w-full px-4">
-                    <a 
-                      href="#" 
-                      className="flex items-center justify-center gap-2 bg-white text-primary px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition text-sm"
-                    >
-                      <img src="https://via.placeholder.com/16?text=AS" alt="App Store" className="w-4 h-4" />
-                      Download on the App Store
-                    </a>
-                    <a 
-                      href="#" 
-                      className="flex items-center justify-center gap-2 bg-white text-primary px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition text-sm"
-                    >
-                      <img src="https://via.placeholder.com/16?text=GP" alt="Google Play" className="w-4 h-4" />
-                      GET IT ON Google Play
-                    </a>
-                  </div>
+                 
                 </div>
               </div>
             </div>
