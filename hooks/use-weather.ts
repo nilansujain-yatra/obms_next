@@ -36,14 +36,7 @@ export function useWeather(city: string) {
       setLoading(true);
       setError(null);
       try {
-        const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
-        if (!apiKey) {
-          throw new Error('OpenWeatherMap API key is not configured');
-        }
-
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
-        );
+        const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
 
         if (!response.ok) {
           throw new Error(`Failed to fetch weather for ${city}`);
