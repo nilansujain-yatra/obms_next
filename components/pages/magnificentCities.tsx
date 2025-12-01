@@ -93,68 +93,183 @@ export default function MagnificientCities() {
 
               {/* Weather Info */}
               {loading ? (
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-accent">--</p>
-                    <p className="text-xs text-muted-foreground">Avg Temp</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-accent">--</p>
-                    <p className="text-xs text-muted-foreground">Humidity</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-accent">
-                      {currentCity.avgCost}
-                    </p>
-                    <p className="text-xs text-muted-foreground">Avg Cost</p>
+                <div className="space-y-4 mb-6">
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="text-center animate-pulse">
+                      <p className="text-2xl font-bold text-accent">--</p>
+                      <p className="text-xs text-muted-foreground">Temperature</p>
+                    </div>
+                    <div className="text-center animate-pulse">
+                      <p className="text-2xl font-bold text-accent">--</p>
+                      <p className="text-xs text-muted-foreground">Humidity</p>
+                    </div>
+                    <div className="text-center animate-pulse">
+                      <p className="text-2xl font-bold text-accent">--</p>
+                      <p className="text-xs text-muted-foreground">Wind</p>
+                    </div>
                   </div>
                 </div>
               ) : weather ? (
                 <>
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-accent">
-                        {weather.temperature}°C
-                      </p>
-                      <p className="text-xs text-muted-foreground">Avg Temp</p>
+                  {/* Main Weather Display */}
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 mb-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <p className="text-sm text-gray-600 mb-1">
+                          {weather.city}, {weather.country}
+                        </p>
+                        <p className="text-3xl font-bold text-primary">
+                          {weather.temperature}°C
+                        </p>
+                        <p className="text-gray-700 capitalize font-medium">
+                          {weather.description}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-gray-600">Feels Like</p>
+                        <p className="text-2xl font-bold text-accent">
+                          {weather.feelsLike}°C
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-accent">
-                        {weather.humidity}%
-                      </p>
-                      <p className="text-xs text-muted-foreground">Humidity</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-accent">
-                        {currentCity.avgCost}
-                      </p>
-                      <p className="text-xs text-muted-foreground">Avg Cost</p>
+
+                    {/* Temperature Range */}
+                    <div className="flex gap-4 text-sm mb-4 pt-4 border-t border-blue-200">
+                      <div>
+                        <p className="text-gray-600">Min Temp</p>
+                        <p className="font-semibold text-gray-800">
+                          {weather.tempMin}°C
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-600">Max Temp</p>
+                        <p className="font-semibold text-gray-800">
+                          {weather.tempMax}°C
+                        </p>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Additional Weather Details */}
-                  <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 mb-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Cloud className="w-5 h-5 text-blue-600" />
-                      <p className="font-semibold text-gray-700">
-                        {weather.description}
-                      </p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div className="flex items-center gap-2">
-                        <Droplets className="w-4 h-4 text-blue-500" />
-                        <span className="text-gray-600">
-                          Feels like {weather.feelsLike}°C
-                        </span>
+                  {/* Weather Details Grid */}
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    {/* Humidity */}
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Droplets className="w-6 h-6 text-blue-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Humidity</p>
+                        <p className="text-lg font-bold text-gray-800">
+                          {weather.humidity}%
+                        </p>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Wind className="w-4 h-4 text-blue-500" />
-                        <span className="text-gray-600">
-                          Wind {weather.windSpeed} m/s
-                        </span>
+                    </div>
+
+                    {/* Wind Speed */}
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Wind className="w-6 h-6 text-green-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Wind Speed</p>
+                        <p className="text-lg font-bold text-gray-800">
+                          {weather.windSpeed} m/s
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Pressure */}
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Gauge className="w-6 h-6 text-orange-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Pressure</p>
+                        <p className="text-lg font-bold text-gray-800">
+                          {weather.pressure} hPa
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Visibility */}
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Eye className="w-6 h-6 text-purple-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Visibility</p>
+                        <p className="text-lg font-bold text-gray-800">
+                          {weather.visibility} km
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Cloud Coverage */}
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Cloud className="w-6 h-6 text-gray-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Cloudiness</p>
+                        <p className="text-lg font-bold text-gray-800">
+                          {weather.cloudiness}%
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Wind Direction */}
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Compass className="w-6 h-6 text-red-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Wind Direction</p>
+                        <p className="text-lg font-bold text-gray-800">
+                          {weather.windDegree}°
+                        </p>
                       </div>
                     </div>
                   </div>
+
+                  {/* Sun Times */}
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Sunrise className="w-6 h-6 text-yellow-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Sunrise</p>
+                        <p className="text-sm font-bold text-gray-800">
+                          {weather.sunrise}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                      <Sunset className="w-6 h-6 text-orange-600 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Sunset</p>
+                        <p className="text-sm font-bold text-gray-800">
+                          {weather.sunset}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Rain/Snow if available */}
+                  {(weather.rainVolume || weather.windGust) && (
+                    <div className="grid grid-cols-2 gap-3 mb-6">
+                      {weather.windGust && (
+                        <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                          <Wind className="w-6 h-6 text-cyan-500 flex-shrink-0" />
+                          <div>
+                            <p className="text-xs text-muted-foreground">Wind Gust</p>
+                            <p className="text-lg font-bold text-gray-800">
+                              {weather.windGust} m/s
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {weather.rainVolume && (
+                        <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
+                          <CloudRain className="w-6 h-6 text-blue-600 flex-shrink-0" />
+                          <div>
+                            <p className="text-xs text-muted-foreground">Rain (1h)</p>
+                            <p className="text-lg font-bold text-gray-800">
+                              {weather.rainVolume} mm
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </>
               ) : null}
 
