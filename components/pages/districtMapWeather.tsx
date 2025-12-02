@@ -50,10 +50,10 @@ export default function DistrictMapWeather() {
           Discover weather and travel information for each district
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* LEFT: Map Section */}
-          <div className="flex flex-col items-center justify-center bg-white rounded-2xl p-8 shadow-lg">
-            <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center">
+          <div className="w-full lg:w-2/5 flex flex-col items-center justify-center bg-white rounded-2xl p-6 shadow-lg">
+            <div className="relative w-full h-[300px] sm:h-[350px] flex items-center justify-center">
               {/* Map Background Image */}
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F424e454243b04c6f886ba008656c7144%2Fd2054263e66e485c8d703902d74ad797?format=webp&width=800"
@@ -61,24 +61,22 @@ export default function DistrictMapWeather() {
                 className="w-full h-full object-contain"
               />
 
-              {/* Overlay: Highlight selected district */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="text-center">
-                  <h3 className="text-5xl font-serif text-primary opacity-70 drop-shadow-lg">
-                    {selectedDistrict}
-                  </h3>
-                </div>
+              {/* City Name - Bottom Left Corner */}
+              <div className="absolute bottom-4 left-4 pointer-events-none">
+                <h3 className="text-3xl sm:text-4xl font-serif text-primary drop-shadow-lg">
+                  {selectedDistrict}
+                </h3>
               </div>
             </div>
 
             {/* District List - Scrollable */}
-            <div className="mt-6 w-full">
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+            <div className="mt-4 w-full">
+              <div className="grid grid-cols-3 gap-2">
                 {RAJASTHAN_DISTRICTS.map((district) => (
                   <button
                     key={district.name}
                     onClick={() => setSelectedDistrict(district.name)}
-                    className={`px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                    className={`px-2 py-1 rounded-lg text-xs font-medium transition-all ${
                       selectedDistrict === district.name
                         ? 'bg-primary text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -92,7 +90,7 @@ export default function DistrictMapWeather() {
           </div>
 
           {/* RIGHT: Weather & Details Section */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
+          <div className="w-full lg:w-3/5 bg-white rounded-2xl p-6 shadow-lg">
             {/* Header with Navigation */}
             <div className="flex items-center justify-between mb-6">
               <button
