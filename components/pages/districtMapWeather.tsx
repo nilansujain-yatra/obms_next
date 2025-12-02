@@ -43,11 +43,11 @@ export default function DistrictMapWeather() {
   return (
     <section className="py-16 px-4 bg-gradient-to-b from-red-50 to-pink-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-primary mb-2 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-2 text-center">
           Explore Rajasthan Districts
         </h2>
-        <p className="text-center text-muted-foreground mb-12">
-          Discover weather and travel information for each district
+        <p className="text-center text-muted-foreground mb-8 text-sm sm:text-base">
+          Select a district to view weather and travel information
         </p>
 
         <div className="flex flex-col lg:flex-row gap-6 items-start">
