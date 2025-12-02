@@ -92,25 +92,25 @@ export default function DistrictMapWeather() {
           {/* RIGHT: Weather & Details Section */}
           <div className="w-full lg:w-3/5 bg-white rounded-2xl p-6 shadow-lg">
             {/* Header with Navigation */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between gap-2 mb-4">
               <button
                 onClick={goToPrevious}
-                className="p-2 bg-gray-100 rounded-lg hover:bg-red-50 transition flex-shrink-0"
+                className="p-1.5 bg-gray-100 rounded-lg hover:bg-red-50 transition flex-shrink-0"
                 aria-label="Previous district"
               >
-                <ChevronLeft className="w-6 h-6 text-primary" />
+                <ChevronLeft className="w-5 h-5 text-primary" />
               </button>
 
-              <h3 className="text-3xl font-bold text-primary text-center flex-1">
+              <h3 className="text-2xl font-bold text-primary text-center flex-1 truncate">
                 {selectedDistrict}
               </h3>
 
               <button
                 onClick={goToNext}
-                className="p-2 bg-gray-100 rounded-lg hover:bg-red-50 transition flex-shrink-0"
+                className="p-1.5 bg-gray-100 rounded-lg hover:bg-red-50 transition flex-shrink-0"
                 aria-label="Next district"
               >
-                <ChevronRight className="w-6 h-6 text-primary" />
+                <ChevronRight className="w-5 h-5 text-primary" />
               </button>
             </div>
 
