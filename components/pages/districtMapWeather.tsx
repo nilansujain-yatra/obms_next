@@ -127,77 +127,68 @@ export default function DistrictMapWeather() {
             ) : weather ? (
               <>
                 {/* Main Weather Display */}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 mb-6">
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 mb-4">
+                  <div className="flex flex-col gap-2">
                     {/* City Info */}
                     <div>
-                      <p className="text-sm text-gray-600 mb-1">
+                      <p className="text-xs text-gray-600">
                         {weather.city}, {weather.country}
                       </p>
-                      <p className="text-gray-700 capitalize font-medium">
+                      <p className="text-gray-700 capitalize font-medium text-sm">
                         {weather.description}
                       </p>
                     </div>
 
                     {/* Temperature */}
-                    <div className="text-center">
-                      <p className="text-5xl font-extrabold text-primary">
+                    <div>
+                      <p className="text-4xl font-extrabold text-primary">
                         {weather.temperature}°C
                       </p>
-                      <p className="text-xs text-gray-600 mt-1 font-medium">Current</p>
+                      <p className="text-xs text-gray-600 font-medium">Current</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Weather Details Grid */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  {/* Temperature Details */}
-                  <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4">
-                    <p className="text-xs font-medium text-gray-600 mb-2">Feels Like</p>
-                    <p className="text-2xl font-bold text-primary">{weather.feelsLike}°C</p>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4">
-                    <p className="text-xs font-medium text-gray-600 mb-2">Min / Max</p>
-                    <p className="text-2xl font-bold text-primary">
-                      {weather.tempMin}° / {weather.tempMax}°C
-                    </p>
-                  </div>
-
+                <div className="grid grid-cols-3 gap-3 mb-4">
                   {/* Humidity */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                    <Droplets className="w-6 h-6 text-blue-500 flex-shrink-0" />
-                    <div>
-                      <p className="text-xs font-medium text-gray-600">Humidity</p>
-                      <p className="text-lg font-bold text-gray-800">{weather.humidity}%</p>
-                    </div>
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Droplets className="w-5 h-5 text-blue-500 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Humidity</p>
+                    <p className="text-lg font-bold text-gray-800">{weather.humidity}%</p>
                   </div>
 
                   {/* Wind Speed */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                    <Wind className="w-6 h-6 text-green-500 flex-shrink-0" />
-                    <div>
-                      <p className="text-xs font-medium text-gray-600">Wind Speed</p>
-                      <p className="text-lg font-bold text-gray-800">{weather.windSpeed} m/s</p>
-                    </div>
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Wind className="w-5 h-5 text-green-500 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Wind</p>
+                    <p className="text-lg font-bold text-gray-800">{weather.windSpeed} m/s</p>
+                  </div>
+
+                  {/* Feels Like */}
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <p className="text-xs font-medium text-gray-600 mb-1">Feels</p>
+                    <p className="text-lg font-bold text-primary">{weather.feelsLike}°C</p>
                   </div>
 
                   {/* Sunrise */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                    <Sunrise className="w-6 h-6 text-yellow-500 flex-shrink-0" />
-                    <div>
-                      <p className="text-xs font-medium text-gray-600">Sunrise</p>
-                      <p className="text-sm font-bold text-gray-800">{weather.sunrise}</p>
-                    </div>
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Sunrise className="w-5 h-5 text-yellow-500 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Sunrise</p>
+                    <p className="text-xs font-bold text-gray-800">{weather.sunrise}</p>
                   </div>
 
                   {/* Sunset */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                    <Sunset className="w-6 h-6 text-orange-600 flex-shrink-0" />
-                    <div>
-                      <p className="text-xs font-medium text-gray-600">Sunset</p>
-                      <p className="text-sm font-bold text-gray-800">{weather.sunset}</p>
-                    </div>
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Sunset className="w-5 h-5 text-orange-600 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Sunset</p>
+                    <p className="text-xs font-bold text-gray-800">{weather.sunset}</p>
+                  </div>
+
+                  {/* Min/Max */}
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <p className="text-xs font-medium text-gray-600 mb-1">Min/Max</p>
+                    <p className="text-sm font-bold text-gray-800">{weather.tempMin}°/{weather.tempMax}°</p>
                   </div>
                 </div>
 
