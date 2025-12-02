@@ -36,7 +36,10 @@ export function useWeather(city: string) {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+        // const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=1a4b940eda8ac8cabfee4d894c5cec06`);
+
+
 
         if (!response.ok) {
           throw new Error(`Failed to fetch weather for ${city}`);
@@ -46,10 +49,12 @@ export function useWeather(city: string) {
 
         const formatTime = (timestamp: number, offset: number) => {
           const date = new Date((timestamp + offset) * 1000);
-          return date.toLocaleTimeString('en-US', {
+          console.log(date);
+            return date.toLocaleTimeString('en-IN', {
             hour: '2-digit',
             minute: '2-digit',
             hour12: true,
+                timeZone: 'UTC',          // <- IMPORTANT: prevents double offset
           });
         };
 
