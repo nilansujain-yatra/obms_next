@@ -2,378 +2,196 @@
 
 import { useState } from 'react';
 import { useWeather } from '@/hooks/use-weather';
-import { ChevronLeft, ChevronRight, Cloud, Droplets, Wind, Eye, Gauge, Compass, Sunrise, Sunset, CloudRain } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Droplets, Wind, Sunrise, Sunset } from 'lucide-react';
 
-const RAJASTHAN_CITIES = [
-  {
-    name: 'Jaipur',
-    description:
-      'The City Palace, Jantar Mantar, Hawa Mahal and other magnificent structures showcase the city\'s royal legacy.',
-    avgCost: '3K',
-  },
-  {
-    name: 'Udaipur',
-    description:
-      'The Venice of the East, Udaipur is known for its beautiful lakes, palaces, and serene backwaters.',
-    avgCost: '3.5K',
-  },
-  {
-    name: 'Jodhpur',
-    description:
-      'The Blue City, famous for its stunning Mehrangarh Fort and intricate blue-painted houses.',
-    avgCost: '2.5K',
-  },
-  {
-    name: 'Jaisalmer',
-    description:
-      'The Golden City, an enchanting desert destination with magnificent havelis and camel safaris.',
-    avgCost: '2K',
-  },
-  {
-    name: 'Pushkar',
-    description:
-      'A sacred pilgrimage site with the famous Pushkar Camel Fair and the holy Pushkar Lake.',
-    avgCost: '1.5K',
-  },
-  {
-    name: 'Bikaner',
-    description:
-      'Known for its grand Junagarh Fort and traditional Rajasthani culture with delicious snacks.',
-    avgCost: '2K',
-  },
+const RAJASTHAN_DISTRICTS = [
+  { name: 'Jaipur', coordinates: { x: 50, y: 45 } },
+  { name: 'Udaipur', coordinates: { x: 30, y: 70 } },
+  { name: 'Jodhpur', coordinates: { x: 25, y: 50 } },
+  { name: 'Jaisalmer', coordinates: { x: 15, y: 35 } },
+  { name: 'Bikaner', coordinates: { x: 35, y: 25 } },
+  { name: 'Ajmer', coordinates: { x: 40, y: 55 } },
+  { name: 'Pushkar', coordinates: { x: 42, y: 52 } },
+  { name: 'Kota', coordinates: { x: 60, y: 60 } },
+  { name: 'Chittorgarh', coordinates: { x: 50, y: 65 } },
+  { name: 'Bhilwara', coordinates: { x: 55, y: 70 } },
+  { name: 'Rajsamand', coordinates: { x: 48, y: 72 } },
+  { name: 'Pali', coordinates: { x: 35, y: 75 } },
+  { name: 'Dungarpur', coordinates: { x: 40, y: 78 } },
+  { name: 'Banswara', coordinates: { x: 50, y: 80 } },
+  { name: 'Barmer', coordinates: { x: 20, y: 55 } },
+  { name: 'Jalor', coordinates: { x: 28, y: 62 } },
 ];
 
-export default function MagnificientCities() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const currentCity = RAJASTHAN_CITIES[currentIndex];
-  const { weather, loading } = useWeather(currentCity.name);
+export default function DistrictMapWeather() {
+  const [selectedDistrict, setSelectedDistrict] = useState('Jaipur');
+  const { weather, loading } = useWeather(selectedDistrict);
+
+  const currentDistrict = RAJASTHAN_DISTRICTS.find(d => d.name === selectedDistrict);
+  const districtIndex = RAJASTHAN_DISTRICTS.findIndex(d => d.name === selectedDistrict);
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? RAJASTHAN_CITIES.length - 1 : prev - 1
-    );
+    const newIndex = districtIndex === 0 ? RAJASTHAN_DISTRICTS.length - 1 : districtIndex - 1;
+    setSelectedDistrict(RAJASTHAN_DISTRICTS[newIndex].name);
   };
 
   const goToNext = () => {
-    setCurrentIndex((prev) =>
-      prev === RAJASTHAN_CITIES.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const goToCity = (index: number) => {
-    setCurrentIndex(index);
+    const newIndex = districtIndex === RAJASTHAN_DISTRICTS.length - 1 ? 0 : districtIndex + 1;
+    setSelectedDistrict(RAJASTHAN_DISTRICTS[newIndex].name);
   };
 
   return (
-    <section className="py-16 sm:py-10 px-4 bg-red-50">
+    <section className="py-16 px-4 bg-gradient-to-b from-red-50 to-pink-50">
       <div className="max-w-7xl mx-auto">
-        <h3 className="text-3xl sm:text-4xl font-bold text-primary mb-2 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-2 text-center">
           Magnificent Cities of Rajasthan
-        </h3>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Each city possesses a distinct identity enriched with heritage,
-          culture, traditions, and unique beauty of Rajasthan
-        </p>
+        </h2>
+        <p className="text-center text-muted-foreground mb-8 text-sm sm:text-base">
+            Each city possesses a distinct identity enriched with heritage,
+          culture, traditions, and unique beauty of Rajasthan        </p>
 
-        <div className="grid grid-cols-1">
+        <div className="flex flex-col lg:flex-row gap-6 items-start">
+          {/* LEFT: Map Section */}
+          <div className="w-full lg:w-2.5/5 flex flex-col items-center justify-center  rounded-2xl p-6 ">
+            <div className="relative w-full h-[300px] sm:h-[350px] flex items-center justify-center">
+              {/* Map Background Image */}
+              <img
+                src="/images/map.png"
+                alt="Rajasthan Districts Map"
+                className="w-full h-full object-contain"
+              />
 
-        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"> */}
-          {/* Map placeholder */}
-          {/* <div className="h-96 bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center text-center">
-            <div>
-              <p className="text-6xl mb-4">🗺️</p>
-              <p className="text-muted-foreground">Interactive Map</p>
+              {/* City Name - Bottom Left Corner */}
+              <div className="absolute bottom-4 left-4 pointer-events-none">
+                <h3 className="text-3xl sm:text-5xl font-serif text-primary font-bold drop-shadow-lg">
+                  {selectedDistrict}
+                </h3>
+              </div>
             </div>
-          </div> */}
 
-          {/* City Info */}
-          <div>
-            {/* <div className="bg-white p-6 rounded-xl shadow-md mb-6"> */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg mb-8 w-full min-h-[450px] flex flex-col">
+        
+          </div>
 
-             <div className="flex items-center justify-between gap-4 mb-6 w-full">
+          {/* RIGHT: Weather & Details Section */}
+          <div className="w-full lg:w-2.5/5 bg-white rounded-2xl p-6 shadow-lg">
+            {/* Header with Navigation */}
+            <div className="flex items-center justify-between gap-2 mb-4">
+              <button
+                onClick={goToPrevious}
+                className="p-1.5 bg-gray-100 rounded-lg hover:bg-red-50 transition flex-shrink-0"
+                aria-label="Previous district"
+              >
+                <ChevronLeft className="w-5 h-5 text-primary" />
+              </button>
+pnpm dev
+              <h3 className="text-2xl font-bold text-primary text-center flex-1 truncate">
+                {selectedDistrict}
+              </h3>
 
-                {/* LEFT: Previous Button */}
-                <button
-                  onClick={goToPrevious}
-                  className="p-2 bg-white rounded-lg shadow-md hover:bg-red-50 transition flex-shrink-0"
-                  aria-label="Previous city"
-                >
-                  <ChevronLeft className="w-6 h-6 text-primary" />
-                </button>
-
-                {/* CENTER: City Name + Indicators */}
-                <div className="flex flex-col items-center flex-1">
-
-                  {/* City Name */}
-                  <h4 className="text-2xl font-bold text-primary text-center">
-                    {currentCity.name}
-                  </h4>
-
-                  {/* City Indicators */}
-                  <div className="flex gap-2 mt-2 justify-center overflow-x-auto">
-                    {RAJASTHAN_CITIES.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => goToCity(index)}
-                        className={`h-2 rounded-full transition-all ${
-                          index === currentIndex
-                            ? "bg-primary w-8"
-                            : "bg-gray-300 w-2 hover:bg-gray-400"
-                        }`}
-                        aria-label={`Go to ${RAJASTHAN_CITIES[index].name}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* RIGHT: Avg Cost + Next Button */}
-                <div className="flex items-center gap-3 flex-shrink-0">
-
-                  {/* Avg Cost */}
-                  <div className="text-right  mr-10">
-                    <p className="text-md font-medium text-muted-foreground">Avg Cost</p>
-                    <p className="text-lg font-bold text-accent">
-                      ₹{currentCity.avgCost}
-                    </p>
-                  </div>
-
-                  {/* Next Button */}
-                  <button
-                    onClick={goToNext}
-                    className="p-2 bg-white rounded-lg shadow-md hover:bg-red-50 transition"
-                    aria-label="Next city"
-                  >
-                    <ChevronRight className="w-6 h-6 text-primary" />
-                  </button>
-                </div>
-
-              </div>
-
-             
-
-              {/* Weather Info */}
-              {loading ? (
-                <div className="space-y-4 mb-6">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="text-center animate-pulse">
-                      <p className="text-2xl font-bold text-accent">--</p>
-                      <p className="text-xs text-muted-foreground">Temperature</p>
-                    </div>
-                    <div className="text-center animate-pulse">
-                      <p className="text-2xl font-bold text-accent">--</p>
-                      <p className="text-xs text-muted-foreground">Humidity</p>
-                    </div>
-                    <div className="text-center animate-pulse">
-                      <p className="text-2xl font-bold text-accent">--</p>
-                      <p className="text-xs text-muted-foreground">Wind</p>
-                    </div>
-                  </div>
-                </div>
-              ) : weather ? (
-                <>
-                  {/* Main Weather Display */}
-                  {/* <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 mb-6"> */}
-                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 mb-8">
-
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-
-                  {/* LEFT: City + Description */}
-                  <div>
-                    <p className="text-md text-gray-600 mb-1">
-                      {weather.city}, {weather.country}
-                    </p>
-                    <p className="text-gray-700 capitalize font-medium">
-                      {weather.description}
-                    </p>
-                  </div>
-
-                  {/* CENTER: Current Temperature (Main Focus) */}
-                  <div className="text-center">
-                    <p className="text-4xl font-extrabold text-primary leading-none">
-                      {weather.temperature}°C
-                    </p>
-                    <p className="text-sm text-gray-600 mt-1 font-medium">Current</p>
-                  </div>
-
-                  {/* RIGHT: Feels Like + Min + Max */}
-                  <div className="flex gap-6 text-center">
-
-                    {/* Feels Like */}
-                    <div>
-                      <p className="text-xs text-gray-600 font-medium">Feels Like</p>
-                      <p className="text-2xl font-bold text-accent">
-                        {weather.feelsLike}°C
-                      </p>
-                    </div>
-
-                    {/* Min Temp */}
-                    <div>
-                      <p className="text-xs text-gray-600 font-medium">Min</p>
-                      <p className="text-lg font-semibold text-gray-800">
-                        {weather.tempMin}°C
-                      </p>
-                    </div>
-
-                    {/* Max Temp */}
-                    <div>
-                      <p className="text-xs text-gray-600 font-medium">Max</p>
-                      <p className="text-lg font-semibold text-gray-800">
-                        {weather.tempMax}°C
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-
-                  {/* Weather Details Grid */}
-                  {/* <div className="grid grid-cols-2 gap-3 mb-6"> */}
-                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-5 mb-8">
-
-                    {/* Humidity */}
-                   <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-center gap-4 text-center">
-                    {/* Left Icon */}
-                    <Droplets className="w-6 h-6 text-blue-500 flex-shrink-0" />
-
-                    {/* Right Text */}
-                    <div>
-                      <p className="text-xs font-medium  text-muted-foreground">Humidity</p>
-                      <p className="text-lg font-bold text-gray-800">
-                        {weather.humidity}%
-                      </p>
-                    </div>
-                  </div>
-
-
-                    {/* Wind Speed */}
-                   <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-center gap-4 text-center">
-                      <Wind className="w-6 h-6 text-green-500 flex-shrink-0" />
-                      <div>
-                        <p className="text-xs font-medium text-muted-foreground">Wind Speed</p>
-                        <p className="text-lg font-bold text-gray-800">
-                          {weather.windSpeed} m/s
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Pressure */}
-                    {/* <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                      <Gauge className="w-6 h-6 text-orange-500 flex-shrink-0" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Pressure</p>
-                        <p className="text-lg font-bold text-gray-800">
-                          {weather.pressure} hPa
-                        </p>
-                      </div>
-                    </div> */}
-
-                    {/* Visibility */}
-                    {/* <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                      <Eye className="w-6 h-6 text-purple-500 flex-shrink-0" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Visibility</p>
-                        <p className="text-lg font-bold text-gray-800">
-                          {weather.visibility} km
-                        </p>
-                      </div>
-                    </div> */}
-
-                    {/* Cloud Coverage */}
-                    {/* <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                      <Cloud className="w-6 h-6 text-gray-500 flex-shrink-0" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Cloudiness</p>
-                        <p className="text-lg font-bold text-gray-800">
-                          {weather.cloudiness}%
-                        </p>
-                      </div>
-                    </div> */}
-
-                    {/* Wind Direction */}
-                    {/* <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                      <Compass className="w-6 h-6 text-red-500 flex-shrink-0" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Wind Direction</p>
-                        <p className="text-lg font-bold text-gray-800">
-                          {weather.windDegree}°
-                        </p>
-                      </div>
-                    </div> */}
-
-                      {/* Sunrise */}
-                   <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-center gap-4 text-center">
-                      <Sunrise className="w-6 h-6 text-yellow-500 flex-shrink-0" />
-                      <div>
-                        <p className="text-xs font-medium text-muted-foreground">Sunrise</p>
-                        <p className="text-sm font-bold text-gray-800">
-                          {weather.sunrise}
-                        </p>
-                      </div>
-                    </div>
-
-                      {/* sunset  */}
-                   <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-center gap-4 text-center">
-                      <Sunset className="w-6 h-6 text-orange-600 flex-shrink-0" />
-                      <div>
-                        <p className="text-xs font-medium  text-muted-foreground">Sunset</p>
-                        <p className="text-sm font-bold text-gray-800">
-                          {weather.sunset}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-              
-
-                  {/* Rain/Snow if available */}
-                  {/* {(weather.rainVolume || weather.windGust) && (
-                    <div className="grid grid-cols-2 gap-3 mb-6">
-                      {weather.windGust && (
-                        <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                          <Wind className="w-6 h-6 text-cyan-500 flex-shrink-0" />
-                          <div>
-                            <p className="text-xs text-muted-foreground">Wind Gust</p>
-                            <p className="text-lg font-bold text-gray-800">
-                              {weather.windGust} m/s
-                            </p>
-                          </div>
-                        </div>
-                      )}
-
-                      {weather.rainVolume && (
-                        <div className="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-3">
-                          <CloudRain className="w-6 h-6 text-blue-600 flex-shrink-0" />
-                          <div>
-                            <p className="text-xs text-muted-foreground">Rain (1h)</p>
-                            <p className="text-lg font-bold text-gray-800">
-                              {weather.rainVolume} mm
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )} */}
-                </>
-              ) : null
-              }
-
-              {!loading && !weather && (
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                  <p className="text-sm text-yellow-700">Weather data is loading...</p>
-                </div>
-              )}
-
-              <p className="text-sm text-muted-foreground mb-4">
-                {currentCity.description}
-              </p>
-              <button className="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition">
-                Explore {currentCity.name}
+              <button
+                onClick={goToNext}
+                className="p-1.5 bg-gray-100 rounded-lg hover:bg-red-50 transition flex-shrink-0"
+                aria-label="Next district"
+              >
+                <ChevronRight className="w-5 h-5 text-primary" />
               </button>
             </div>
 
-          
+            <p></p>
+
+            {/* Weather Section */}
+            {loading ? (
+              <div className="space-y-4 animate-pulse">
+                <div className="h-20 bg-gray-200 rounded-lg"></div>
+                <div className="grid grid-cols-4 gap-3">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="h-16 bg-gray-200 rounded-lg"></div>
+                  ))}
+                </div>
+              </div>
+            ) : weather ? (
+              <>
+                {/* Main Weather Display */}
+                <div className="bg-[#FDF3F3] rounded-lg p-4 mb-4">
+                  <div className="flex items-center justify-between gap-4">
+
+                    {/* LEFT: City Info */}
+                    <div>
+                      <p className="text-xs text-gray-600">
+                        {weather.city}, {weather.country}
+                      </p>
+                      <p className="text-gray-700 capitalize font-medium text-sm">
+                        {weather.description}
+                      </p>
+                    </div>
+
+                    {/* RIGHT: Temperature */}
+                    <div className="text-right">
+                      <p className="text-4xl font-extrabold text-primary leading-none">
+                        {weather.temperature}°C
+                      </p>
+                      <p className="text-xs text-gray-600 font-medium mt-1">
+                        Current
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                {/* Weather Details Grid */}
+                <div className="grid grid-cols-3 gap-3 mb-4">
+                  {/* Humidity */}
+                  {/* <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Droplets className="w-5 h-5 text-blue-500 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Humidity</p>
+                    <p className="text-lg font-bold text-gray-800">{weather.humidity}%</p>
+                  </div> */}
+
+                  {/* Wind Speed */}
+                  {/* <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Wind className="w-5 h-5 text-green-500 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Wind</p>
+                    <p className="text-lg font-bold text-gray-800">{weather.windSpeed} m/s</p>
+                  </div> */}
+
+                  {/* Feels Like */}
+                  {/* <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <p className="text-xs font-medium text-gray-600 mb-1">Feels</p>
+                    <p className="text-lg font-bold text-primary">{weather.feelsLike}°C</p>
+                  </div> */}
+
+                  {/* Sunrise */}
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Sunrise className="w-5 h-5 text-yellow-500 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Sunrise</p>
+                    <p className="text-xs font-bold text-gray-800">{weather.sunrise}</p>
+                  </div>
+
+                  {/* Sunset */}
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <Sunset className="w-5 h-5 text-orange-600 mb-1" />
+                    <p className="text-xs font-medium text-gray-600">Sunset</p>
+                    <p className="text-xs font-bold text-gray-800">{weather.sunset}</p>
+                  </div>
+
+                  {/* Min/Max */}
+                  <div className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center text-center">
+                    <p className="text-xs font-medium text-gray-600 mb-1">Min/Max</p>
+                    <p className="text-sm font-bold text-gray-800">{weather.tempMin}°/{weather.tempMax}°</p>
+                  </div>
+                </div>
+
+                {/* Explore Button */}
+                <button className="w-full bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary/90 transition">
+                  Explore {selectedDistrict} →
+                </button>
+              </>
+            ) : (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <p className="text-sm text-yellow-700">Unable to load weather data</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

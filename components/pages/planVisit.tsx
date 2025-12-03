@@ -1,6 +1,6 @@
 export default function PlanVisit(){
     return (
-        <section className="py-16 sm:py-24 px-4">
+        <section className="py-16 sm:py-2 px-4">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-3xl sm:text-4xl font-bold text-primary mb-12 text-center">
             Plan Your Perfect Visit

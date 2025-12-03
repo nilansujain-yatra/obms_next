@@ -34,7 +34,7 @@ export default function Home() {
       <DistrictMapWeather />
 
       {/* Magnificent Cities */}
-      <MagnificientCities />
+      {/* <MagnificientCities /> */}
 
       {/* Plan Your Perfect Visit */}
       <PlanVisit />
